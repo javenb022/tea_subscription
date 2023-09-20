@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   # post "/subscribe", to: "subscribe#create"
   post "/api/v1/user/:id/subscribe", to: "api/v1/subscribe#create"
+  patch "/api/v1/users/:id/unsubscribe", to: "api/v1/unsubscribe#update"
 end

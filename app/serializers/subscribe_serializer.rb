@@ -1,5 +1,7 @@
 class SubscribeSerializer
   include JSONAPI::Serializer
+  set_type :subscription
+  attributes :title, :price, :frequency, :status
 
   def self.serialize(sub, tea)
     {
