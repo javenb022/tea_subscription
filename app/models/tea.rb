@@ -1,5 +1,5 @@
 class Tea < ApplicationRecord
-  has_many :tea_subscriptions
-  has_many :subscriptions, through: :tea_subscriptions
-  has_many :users, through: :subscriptions
+  has_many :subscriptions
+  has_many :user_subscriptions, through: :subscriptions
+  has_many :users, through: :user_subscriptions
 end

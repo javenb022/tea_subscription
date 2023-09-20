@@ -1,11 +1,17 @@
-class Api::V1::SubscribeController < ApplicationController
+class Api::V1::SubscriptionController < ApplicationController
+  def index
+    user = User.find(params[:user_id])
+    subs = user.subscriptions
+    teas = user.teas
+    render json: SubscriptionSerializer.serialize_all(subs, teas), status: :ok
+  end
+
   def create
     sub = Subscription.create(subscription_params)
     tea = Tea.find(params[:tea_id])
     if sub.save && user_check?
       create_user_subscription(sub.id, params[:id])
-      create_teas_subscription(sub.id, params[:tea_id])
-      render json: SubscribeSerializer.serialize(sub, tea), status: :created
+      render json: SubscriptionSerializer.serialize(sub, tea), status: :created
     else
       render json: { errors: "Missing required fields" }, status: :unprocessable_entity
     end
@@ -18,14 +24,10 @@ class Api::V1::SubscribeController < ApplicationController
   end
 
   def subscription_params
-    params.permit(:title, :price, :frequency, :status)
+    params.permit(:title, :price, :frequency, :status, :tea_id)
   end
 
   def create_user_subscription(sub_id, user_id)
     UserSubscription.create(user_id: user_id, subscription_id: sub_id)
-  end
-
-  def create_teas_subscription(sub_id, tea_id)
-    TeaSubscription.create(tea_id: tea_id, subscription_id: sub_id)
   end
 end

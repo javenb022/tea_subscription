@@ -5,7 +5,7 @@ RSpec.describe "Unsubscribe", type: :request do
     @user1 = User.create!(email: "javen@gmail.com", first_name: "Javen", last_name: "Wilson", address: "1234 Main St")
     @tea1 = Tea.create!(title: "Earl Grey", description: "Tea", temperature: 200, brew_time: 5)
     @tea2 = Tea.create!(title: "Green Tea", description: "Tea", temperature: 200, brew_time: 5)
-    @sub1 = Subscription.create!(title: "Pro", price: 10.00, frequency: "Monthly", status: "Active")
+    @sub1 = Subscription.create!(title: "Pro", price: 10.00, frequency: "Monthly", status: "Active", tea_id: @tea1.id)
   end
 
   describe "Happy Path" do

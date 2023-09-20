@@ -1,4 +1,4 @@
-class SubscribeSerializer
+class SubscriptionSerializer
   include JSONAPI::Serializer
   set_type :subscription
   attributes :title, :price, :frequency, :status
@@ -23,5 +23,12 @@ class SubscribeSerializer
         }
       }
     }
+  end
+
+  def self.serialize_all(subs, teas)
+    subs.map do |sub|
+      tea = teas.find { |tea| tea.id == sub.tea_id }
+      serialize(sub, tea)
+    end
   end
 end
