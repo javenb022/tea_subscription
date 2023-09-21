@@ -27,7 +27,8 @@ class SubscriptionSerializer
 
   def self.serialize_all(subs, teas)
     subs.map do |sub|
-      tea = teas.find { |tea| tea.id == sub.tea_id }
+      # line 31 makes this slow if there are a lot of subscriptions
+      tea = teas.find { |tea| tea.id == sub.tea_id } # use sub.tea.id instead of enumerating
       serialize(sub, tea)
     end
   end

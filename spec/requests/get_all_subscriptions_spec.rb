@@ -23,7 +23,7 @@ RSpec.describe "Get all subscriptions for a User", type: :request do
         expect(response).to have_http_status(200)
 
         json = JSON.parse(response.body, symbolize_names: true)
-        # require 'pry'; binding.pry
+
         expect(json.count).to eq(2)
         expect(json[0][:data]).to have_key(:id)
         expect(json[0][:data][:id]).to be_an(Integer)

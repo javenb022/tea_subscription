@@ -22,7 +22,7 @@ RSpec.describe "Unsubscribe", type: :request do
         expect(response).to have_http_status(200)
 
         json = JSON.parse(response.body, symbolize_names: true)
-
+require 'pry'; binding.pry
         expect(json[:data]).to have_key(:id)
         expect(json[:data][:id]).to be_a(String)
         expect(json[:data]).to have_key(:type)

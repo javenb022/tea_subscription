@@ -22,7 +22,7 @@ RSpec.describe "Subscribe", type: :request do
                   status: "Active"
                 }
 
-        post "/api/v1/user/#{@user1.id}/subscribe", params: params
+        post "/api/v1/users/#{@user1.id}/subscribe", params: params
 
         expect(response).to be_successful
         expect(response).to have_http_status(201)
@@ -70,7 +70,7 @@ RSpec.describe "Subscribe", type: :request do
                 status: "Active"
               }
 
-      post "/api/v1/user/#{@user1.id}/subscribe", params: params
+      post "/api/v1/users/#{@user1.id}/subscribe", params: params
 
       expect(response).to_not be_successful
       expect(response).to have_http_status(422)
